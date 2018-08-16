@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: a4949c0808b8a7d4d895e99705de1af4
+timeCreated: 1531945329
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Big_Bottom_Cartoon
+  fontNames:
+  - Big_Bottom_Cartoon
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2017
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monkey Ball", "Monkey Ball.csproj", "{408F5A8F-ABBC-40E0-9514-5FB0FB9EEA21}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monkey Ball", "Monkey Ball.csproj", "{408F5A8F-ABBC-40E0-9514-5FB0FB9EEA21}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monkey Ball.Editor", "Monkey Ball.Editor.csproj", "{A45F951F-01BE-7536-D95D-B9325A4368F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monkey Ball.Editor", "Monkey Ball.Editor.csproj", "{A45F951F-01BE-7536-D95D-B9325A4368F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monkey Ball.Editor", "Monkey Ball.Editor.csproj", "{A45F951F-01BE-7536-D95D-B9325A4368F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monkey Ball.Editor", "Monkey Ball.Editor.csproj", "{A45F951F-01BE-7536-D95D-B9325A4368F4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{408F5A8F-ABBC-40E0-9514-5FB0FB9EEA21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{408F5A8F-ABBC-40E0-9514-5FB0FB9EEA21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{408F5A8F-ABBC-40E0-9514-5FB0FB9EEA21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{408F5A8F-ABBC-40E0-9514-5FB0FB9EEA21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{408F5A8F-ABBC-40E0-9514-5FB0FB9EEA21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{408F5A8F-ABBC-40E0-9514-5FB0FB9EEA21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{408F5A8F-ABBC-40E0-9514-5FB0FB9EEA21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{408F5A8F-ABBC-40E0-9514-5FB0FB9EEA21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A45F951F-01BE-7536-D95D-B9325A4368F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A45F951F-01BE-7536-D95D-B9325A4368F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A45F951F-01BE-7536-D95D-B9325A4368F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A45F951F-01BE-7536-D95D-B9325A4368F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A45F951F-01BE-7536-D95D-B9325A4368F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A45F951F-01BE-7536-D95D-B9325A4368F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A45F951F-01BE-7536-D95D-B9325A4368F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A45F951F-01BE-7536-D95D-B9325A4368F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A45F951F-01BE-7536-D95D-B9325A4368F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A45F951F-01BE-7536-D95D-B9325A4368F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A45F951F-01BE-7536-D95D-B9325A4368F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A45F951F-01BE-7536-D95D-B9325A4368F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A45F951F-01BE-7536-D95D-B9325A4368F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A45F951F-01BE-7536-D95D-B9325A4368F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A45F951F-01BE-7536-D95D-B9325A4368F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A45F951F-01BE-7536-D95D-B9325A4368F4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
