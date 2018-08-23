@@ -461,6 +461,7 @@
     <None Include="Assets\Asset Packages\_MK\MKGlassFree\Shader\MKGlassCommonFree.shader" />
     <None Include="Assets\Shaders\Internal-DeferredShading.shader" />
     <None Include="Assets\Shaders\TransparentCutoff-ShadowsOnly.shader" />
+    <None Include="Assets\Shaders\TransparentTextureOutline.shader" />
     <None Include="Assets\Shaders\UnityStandardBRDFCustom.cginc" />
     <None Include="Packages\com.unity.package-manager-ui\Editor\Resources\Styles\Main_Dark.uss" />
     <None Include="Packages\com.unity.package-manager-ui\Editor\Resources\Styles\Main_Light.uss" />

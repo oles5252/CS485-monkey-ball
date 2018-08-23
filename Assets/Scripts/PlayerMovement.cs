@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour {
 
-    float accelFactor = 140;
+    float accelFactor = 280;
     float lastVelocity;
     //public float turnSpeed = 7f;
     public float velocityMagnitude = 0;
@@ -119,7 +119,12 @@ public class PlayerMovement : MonoBehaviour {
         float currVelocity = playerRigidbody.velocity.magnitude;
 
         lastVelocity = currVelocity;
-
+        
+        if((lastDirection.z > 0 && playerRigidbody.velocity.normalized.z < 0) || (lastDirection.z < 0 && playerRigidbody.velocity.normalized.z > 0) ||
+            (lastDirection.x > 0 && playerRigidbody.velocity.normalized.x < 0) || (lastDirection.x < 0 && playerRigidbody.velocity.normalized.x > 0))
+        {
+            playerRigidbody.angularVelocity = new Vector3(0, 0, 0);
+        }
 
         speedometer.text = "Speed: " + Mathf.Floor(currVelocity);
         lastDirection = playerRigidbody.velocity.normalized;

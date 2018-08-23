@@ -107,10 +107,6 @@ namespace MK.Glass
             rimColor = FindProperty(MKGlassFreeMaterialHelper.PropertyNames.RIM_COLOR, props);
             rimSize = FindProperty(MKGlassFreeMaterialHelper.PropertyNames.RIM_SIZE, props);
             rimIntensity = FindProperty(MKGlassFreeMaterialHelper.PropertyNames.RIM_INTENSITY, props);
-
-            // Outline Add ------------------------------------------------------- //
-            _OutlineColor = FindProperty("_OutlineColor", props);
-            _Outline = FindProperty("_Outline", props);
         }
 
         //Colorfield

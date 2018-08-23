@@ -11,8 +11,13 @@ public class Menu : MonoBehaviour {
     public List<string> scenes;
 
     public Text level;
+    public Text levelbg;
 
     public int pos = 0;
+
+    public int continueLevel = 1;
+
+    public int maxUnlocked = 1;
 
     public GameObject pointer;
 
@@ -27,6 +32,11 @@ public class Menu : MonoBehaviour {
     private void Start()
     {
         menuItems[pos].color = Color.red;
+
+        maxUnlocked = PlayerPrefs.GetInt("maxUnlocked", 1);
+        continueLevel = maxUnlocked;
+        level.text = continueLevel.ToString();
+        levelbg.text = continueLevel.ToString();
 
         //JOYCONS START
         // get the public Joycon array attached to the JoyconManager in scene
@@ -134,7 +144,24 @@ public class Menu : MonoBehaviour {
                     menuItems[pos].color = Color.red;
                 }
             }
-
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                if(continueLevel > 1 && menuItems[pos].name == "Continue")
+                {
+                    continueLevel--;
+                    level.text = continueLevel.ToString();
+                    levelbg.text = continueLevel.ToString();
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                if (continueLevel < maxUnlocked && menuItems[pos].name == "Continue")
+                {
+                    continueLevel++;
+                    level.text = continueLevel.ToString();
+                    levelbg.text = continueLevel.ToString();
+                }
+            }
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.KeypadEnter))
             {
                 if (menuItems[pos].name == "New Game")

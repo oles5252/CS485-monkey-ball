@@ -51,10 +51,9 @@
 			#if defined(LIGHTMAP_ON) || defined(DYNAMICLIGHTMAP_ON)
 				float4 uv_Lm : TEXCOORD5;
 			#endif
-			UNITY_SHADOW_COORDS(6)
-		#elif MK_GLASS_FWD_ADD_PASS
-			LIGHTING_COORDS(5,6)
 		#endif
+
+		UNITY_SHADOW_COORDS(6)
 
 		UNITY_FOG_COORDS(7)
 

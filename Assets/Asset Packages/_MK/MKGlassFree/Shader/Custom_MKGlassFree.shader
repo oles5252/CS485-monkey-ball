@@ -1,12 +1,7 @@
-﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
-
-// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
-
-Shader "MK/Glass/Free"
+﻿Shader "MK/Glass/Free"
 {
 	Properties
 	{
-
 		//Main
 		_Color ("Color", Color) = (1,1,1,0.1)
 		_MainTex ("Color (RGB)", 2D) = "white" {}
@@ -34,6 +29,7 @@ Shader "MK/Glass/Free"
 		_OutlineColor("Outline Color", Color) = (0,0,0,1)
 		_Outline("Outline width", Range(.002, 0.03)) = .005
 
+
 		//Editor
 		[HideInInspector] _MKEditorShowMainBehavior ("Main Behavior", int) = 1
 		[HideInInspector] _MKEditorShowRenderBehavior ("Render Behavior", int) = 0
@@ -45,148 +41,146 @@ Shader "MK/Glass/Free"
 	// SM 3.0
 	/////////////////////////////////////////////////////////////////////////////////////////////
 	SubShader
+	{
+		LOD 300
+		Tags {"RenderType"="Transparent" "Queue"="Transparent+21" "PerformanceChecks"="False" "IgnoreProjector"="True" "ForceNoShadowCasting"="True"}
+
+		/////////////////////////////////////////////////////////////////////////////////////////////
+		// Grab Refraction
+		/////////////////////////////////////////////////////////////////////////////////////////////
+		//Get shared refraction
+		UsePass "Hidden/MK/CommonFree/GRAB_SHARED_FWD"
+
+		/////////////////////////////////////////////////////////////////////////////////////////////
+		// VERTEX LIT
+		/////////////////////////////////////////////////////////////////////////////////////////////
+		//Get Vertex Lit from Fallback shader
+
+		/////////////////////////////////////////////////////////////////////////////////////////////
+		// FORWARD BASE
+		/////////////////////////////////////////////////////////////////////////////////////////////
+		Pass
 		{
-			LOD 300
-			Tags {"RenderType" = "TransparentCutout" "Queue" = "Transparent+21" "PerformanceChecks" = "False" "IgnoreProjector" = "True" }
+			Tags { "LightMode" = "ForwardBase" } 
+			Name "FORWARDBASE" 
+			Cull Back
+			Blend SrcAlpha OneMinusSrcAlpha
+			ZWrite On
+			ZTest LEqual
 
-			/////////////////////////////////////////////////////////////////////////////////////////////
-			// Grab Refraction
-			/////////////////////////////////////////////////////////////////////////////////////////////
-			//Get shared refraction
-			UsePass "Hidden/MK/CommonFree/GRAB_SHARED_FWD"
+			CGPROGRAM
+			#pragma target 3.0
 
-			/////////////////////////////////////////////////////////////////////////////////////////////
-			// VERTEX LIT
-			/////////////////////////////////////////////////////////////////////////////////////////////
-			//Get Vertex Lit from Fallback shader
-			/////////////////////////////////////////////////////////////////////////////////////////////
-			// FORWARD BASE
-			/////////////////////////////////////////////////////////////////////////////////////////////
-			Pass
-			{
-				Tags { "LightMode" = "ForwardBase" }
-				Name "FORWARDBASE"
-				Cull Back
-				Blend SrcAlpha OneMinusSrcAlpha
-				ZWrite On
-				ZTest LEqual
+			#pragma fragmentoption ARB_precision_hint_fastest
+			#pragma vertex vertfwd
+			#pragma fragment fragfwd
 
-				CGPROGRAM
-				#pragma target 3.0
+			#pragma multi_compile_fog
+			#pragma multi_compile_fwdbase
+			#pragma multi_compile_instancing
 
-				#pragma fragmentoption ARB_precision_hint_fastest
-				#pragma vertex vertfwd
-				#pragma fragment fragfwd
-
-				#pragma multi_compile_fog
-				#pragma multi_compile_fwdbase
-				#pragma multi_compile_instancing
-
-				#include "Inc/Forward/MKGlassForwardBaseSetup.cginc"
-				#include "Inc/Forward/MKGlassForward.cginc"
-
-				ENDCG
-			}
-
-			/////////////////////////////////////////////////////////////////////////////////////////////
-			// FORWARD ADD
-			/////////////////////////////////////////////////////////////////////////////////////////////
-			Pass
-			{
-				Tags { "LightMode" = "ForwardAdd" "PerformanceChecks" = "False"}
-				Name "FORWARDADD"
-				Cull Back
-				Blend SrcAlpha One
-				ZWrite Off
-				ZTest LEqual
-				Fog { Color(0,0,0,0) }
-
-				CGPROGRAM
-				#pragma target 3.0
-
-				#pragma fragmentoption ARB_precision_hint_fastest
-				#pragma vertex vertfwd
-				#pragma fragment fragfwd
-				#pragma multi_compile_fwdadd_fullshadows
-
-				#pragma multi_compile_fog
-
-				#include "Inc/Forward/MKGlassForwardAddSetup.cginc"
-				#include "Inc/Forward/MKGlassForward.cginc"
-
-				ENDCG
-			}
-
-			//TODO deferred shading pass
-			/////////////////////////////////////////////////////////////////////////////////////////////
-			// DEFERRED
-			/////////////////////////////////////////////////////////////////////////////////////////////
-
-			/////////////////////////////////////////////////////////////////////////////////////////////
-			// SHADOWCASTER
-			/////////////////////////////////////////////////////////////////////////////////////////////
-	
-
-			// ----------------------
-			// Start of Outline adding
-
-			Pass{
-				Name "OUTLINE"
-				Tags{ "LightMode" = "Always" }
-				Cull Front
-				ZWrite On
-				ColorMask RGB
-				Blend SrcAlpha OneMinusSrcAlpha
-
-				CGPROGRAM
-				#include "UnityCG.cginc"
-				#include "AutoLight.cginc"
-				#pragma vertex vert
-				#pragma fragment frag
-				#pragma multi_compile_fog
-
-
-
-				struct appdata {
-				float4 vertex : POSITION;
-				float3 normal : NORMAL;
-			};
-
-			struct v2f {
-				float4 pos : SV_POSITION;
-				UNITY_FOG_COORDS(0)
-					fixed4 color : COLOR;
-			};
-
-			uniform float _Outline;
-			uniform float4 _OutlineColor;
-
-			v2f vert(appdata v) {
-				// just make a copy of incoming vertex data but scaled according to normal direction
-				v2f o;
-				o.pos = UnityObjectToClipPos(v.vertex);
-
-				float3 norm = normalize(mul((float3x3)UNITY_MATRIX_IT_MV, v.normal));
-				float2 offset = TransformViewToProjection(norm.xy);
-
-				o.pos.xy += offset * o.pos.z * _Outline;
-				o.color = _OutlineColor;
-				UNITY_TRANSFER_FOG(o,o.pos);
-				return o;
-			}
-				fixed4 frag(v2f i) : SV_Target
-			{
-				UNITY_APPLY_FOG(i.fogCoord, i.color);
-				float atten = LIGHT_ATTENUATION(i);
-				return i.color;
-			}
+			#include "Inc/Forward/MKGlassForwardBaseSetup.cginc"
+			#include "Inc/Forward/MKGlassForward.cginc"
+			
 			ENDCG
 		}
 
+		/////////////////////////////////////////////////////////////////////////////////////////////
+		// FORWARD ADD
+		/////////////////////////////////////////////////////////////////////////////////////////////
+		Pass
+		{
+			Tags { "LightMode" = "ForwardAdd" "PerformanceChecks"="False"} 
+			Name "FORWARDADD"
+			Cull Back
+			Blend SrcAlpha One
+			ZWrite Off
+			ZTest LEqual
+			Fog { Color (0,0,0,0) }
+
+			CGPROGRAM
+			#pragma target 3.0
+
+			#pragma fragmentoption ARB_precision_hint_fastest
+			#pragma vertex vertfwd
+			#pragma fragment fragfwd
+			#pragma multi_compile_fwdadd_fullshadows
+
+			#pragma multi_compile_fog
+
+			#include "Inc/Forward/MKGlassForwardAddSetup.cginc"
+			#include "Inc/Forward/MKGlassForward.cginc"
+			
+			ENDCG
+		}
+
+		//TODO deferred shading pass
+		/////////////////////////////////////////////////////////////////////////////////////////////
+		// DEFERRED
+		/////////////////////////////////////////////////////////////////////////////////////////////
+
+		/////////////////////////////////////////////////////////////////////////////////////////////
+		// SHADOWCASTER
+		/////////////////////////////////////////////////////////////////////////////////////////////
+
+		// ----------------------
+		// Start of Outline adding
+
+		Pass{
+		Name "OUTLINE"
+		Tags{ "LightMode" = "Always" }
+		Cull Front
+		ZWrite On
+		ColorMask RGB
+		Blend SrcAlpha OneMinusSrcAlpha
+
+		CGPROGRAM
+#include "UnityCG.cginc"
+#include "AutoLight.cginc"
+#pragma vertex vert
+#pragma fragment frag
+#pragma multi_compile_fog
+
+
+
+		struct appdata {
+		float4 vertex : POSITION;
+		float3 normal : NORMAL;
+	};
+
+	struct v2f {
+		float4 pos : SV_POSITION;
+		UNITY_FOG_COORDS(0)
+			fixed4 color : COLOR;
+	};
+
+	uniform float _Outline;
+	uniform float4 _OutlineColor;
+
+	v2f vert(appdata v) {
+		// just make a copy of incoming vertex data but scaled according to normal direction
+		v2f o;
+		o.pos = UnityObjectToClipPos(v.vertex);
+
+		float3 norm = normalize(mul((float3x3)UNITY_MATRIX_IT_MV, v.normal));
+		float2 offset = TransformViewToProjection(norm.xy);
+
+		o.pos.xy += offset * o.pos.z * _Outline;
+		o.color = _OutlineColor;
+		UNITY_TRANSFER_FOG(o,o.pos);
+		return o;
+	}
+	fixed4 frag(v2f i) : SV_Target
+	{
+		UNITY_APPLY_FOG(i.fogCoord, i.color);
+	float atten = LIGHT_ATTENUATION(i);
+	return i.color;
+	}
+		ENDCG
+	}
+
 		// End of Outline adding
 		// ----------------------
-		
-		
 
 		/////////////////////////////////////////////////////////////////////////////////////////////
 		// META
