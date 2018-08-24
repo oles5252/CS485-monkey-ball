@@ -55,41 +55,41 @@ public class ThirdPersonCamera : MonoBehaviour {
         //player = GameObject.FindGameObjectsWithTag("Player")[0];
         //camera = gameObject.GetComponent<Camera>();
 
-       /*
-        if (Input.GetKey(KeyCode.W))
-        {
-            float currFOV = camera.fieldOfView;
-            camera.fieldOfView = Mathf.Lerp(currFOV, forwardFOV, 0.05f);
-            Vector3 currAngle = transform.rotation.eulerAngles;
-            //zRotationOffset = Mathf.Lerp(zRotationOffset, forwardXAngle, 0.05f), currAngle.y, currAngle.z);
-            Vector3 currPos = player.transform.position;
-        }
-        else if (Input.GetKey(KeyCode.S))
-        {
-            float currFOV = camera.fieldOfView;
-            camera.fieldOfView = Mathf.Lerp(currFOV, backwardFOV, 0.05f);
-            Vector3 currAngle = transform.rotation.eulerAngles;
-            //transform.rotation.eulerAngles.Set(Mathf.Lerp(currAngle.x, backwardXAngle, 0.05f), currAngle.y, currAngle.z);
-          //  print(positionOffset.z);
-            /*
-            if (Mathf.Abs(positionOffset.z) > 6.8 && Mathf.Abs(player.GetComponent<Rigidbody>().velocity.z) < 0.3) //if the camera is settled into a position behind the player
-            {
-                if (positionOffset.z < 0 && player.GetComponent<Rigidbody>().velocity.normalized.z < 0) //if the camera z is negative flip forwards
-                {
-                    currentFlipState = 1;
-                }
-                else //if the camera z is positive flip backwards
-                {
-                    currentFlipState = 2;
-                }
-            } */
+        /*
+         if (Input.GetKey(KeyCode.W))
+         {
+             float currFOV = camera.fieldOfView;
+             camera.fieldOfView = Mathf.Lerp(currFOV, forwardFOV, 0.05f);
+             Vector3 currAngle = transform.rotation.eulerAngles;
+             //zRotationOffset = Mathf.Lerp(zRotationOffset, forwardXAngle, 0.05f), currAngle.y, currAngle.z);
+             Vector3 currPos = player.transform.position;
+         }
+         else if (Input.GetKey(KeyCode.S))
+         {
+             float currFOV = camera.fieldOfView;
+             camera.fieldOfView = Mathf.Lerp(currFOV, backwardFOV, 0.05f);
+             Vector3 currAngle = transform.rotation.eulerAngles;
+             //transform.rotation.eulerAngles.Set(Mathf.Lerp(currAngle.x, backwardXAngle, 0.05f), currAngle.y, currAngle.z);
+           //  print(positionOffset.z);
+             /*
+             if (Mathf.Abs(positionOffset.z) > 6.8 && Mathf.Abs(player.GetComponent<Rigidbody>().velocity.z) < 0.3) //if the camera is settled into a position behind the player
+             {
+                 if (positionOffset.z < 0 && player.GetComponent<Rigidbody>().velocity.normalized.z < 0) //if the camera z is negative flip forwards
+                 {
+                     currentFlipState = 1;
+                 }
+                 else //if the camera z is positive flip backwards
+                 {
+                     currentFlipState = 2;
+                 }
+             } */
         //}
         //else
         //{
-            //float currFOV = camera.fieldOfView;
-          //  camera.fieldOfView = Mathf.Lerp(currFOV, defaultFOV, 0.05f);
-          //  Vector3 currAngle = transform.rotation.eulerAngles;
-            // transform.rotation.eulerAngles.Set(Mathf.Lerp(currAngle.x, defaultXAngle, 0.05f), currAngle.y, currAngle.z);
+        //float currFOV = camera.fieldOfView;
+        //  camera.fieldOfView = Mathf.Lerp(currFOV, defaultFOV, 0.05f);
+        //  Vector3 currAngle = transform.rotation.eulerAngles;
+        // transform.rotation.eulerAngles.Set(Mathf.Lerp(currAngle.x, defaultXAngle, 0.05f), currAngle.y, currAngle.z);
         //}
 
         /*handle camera flip for turning around
@@ -130,21 +130,29 @@ public class ThirdPersonCamera : MonoBehaviour {
         */
         //if (Input.GetKey(KeyCode.A))
         //{
-      //      positionOffset = Quaternion.AngleAxis(-turnSpeed, Vector3.up) * positionOffset;
-    //        Vector3 currAngle = transform.rotation.eulerAngles;
-            //transform.rotation.eulerAngles.Set(currAngle.x, currAngle.y, Mathf.Lerp(currAngle.z, leftZAngle, 0.05f));
-          //  xRotationOffset = Mathf.Lerp(xRotationOffset, leftRotationOffset, 0.05f);
+        //      positionOffset = Quaternion.AngleAxis(-turnSpeed, Vector3.up) * positionOffset;
+        //        Vector3 currAngle = transform.rotation.eulerAngles;
+        //transform.rotation.eulerAngles.Set(currAngle.x, currAngle.y, Mathf.Lerp(currAngle.z, leftZAngle, 0.05f));
+        //  xRotationOffset = Mathf.Lerp(xRotationOffset, leftRotationOffset, 0.05f);
         //}
         //if (Input.GetKey(KeyCode.D))
         //{
         //    positionOffset = Quaternion.AngleAxis(turnSpeed, Vector3.up) * positionOffset;
-//            Vector3 currAngle = transform.rotation.eulerAngles;
+        //            Vector3 currAngle = transform.rotation.eulerAngles;
 
-          //  xRotationOffset = Mathf.Lerp(xRotationOffset, rightRotationOffset, 0.05f);
+        //  xRotationOffset = Mathf.Lerp(xRotationOffset, rightRotationOffset, 0.05f);
         //}
         //else
         //{
-          //  xRotationOffset = Mathf.Lerp(xRotationOffset, 0, 0.05f);
+        //  xRotationOffset = Mathf.Lerp(xRotationOffset, 0, 0.05f);
+        //}
+
+        Vector3 screenPos = GetComponent<Camera>().WorldToScreenPoint(player.transform.position);
+        Ray ray = GetComponent<Camera>().ScreenPointToRay(screenPos);
+        //if (Physics.Raycast(ray, hit))
+        //{
+        //    var objectHit: Transform = hit.transform;
+        //    Debug.Log(objectHit);
         //}
 
         Vector3 vectorToPlayer = player.transform.position - transform.position;

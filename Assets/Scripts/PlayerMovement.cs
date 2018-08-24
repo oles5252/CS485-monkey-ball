@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour {
     public float velocityMagnitude = 0;
     //ParticleSystem particles;
     Camera camera;
+    public GameObject movementObj;
     Text speedometer;
     Vector3 lastDirection;
     Rigidbody playerRigidbody;
@@ -53,12 +54,12 @@ public class PlayerMovement : MonoBehaviour {
             print(accel);
             if (accel.x != 0)
             {
-                playerRigidbody.AddForce(camera.transform.forward * accelFactor * -accel.x);
+                playerRigidbody.AddForce(movementObj.transform.forward * accelFactor * -accel.x);
                 velocityMagnitude = playerRigidbody.velocity.magnitude;
             }
             if(accel.y != 0)
             {
-                playerRigidbody.AddForce(camera.transform.right * accelFactor * -accel.y);
+                playerRigidbody.AddForce(movementObj.transform.right * accelFactor * -accel.y);
                 velocityMagnitude = playerRigidbody.velocity.magnitude;
             }
 
@@ -70,7 +71,7 @@ public class PlayerMovement : MonoBehaviour {
             {
                 //Physics.gravity = Vector3.Slerp(Physics.gravity, maxForwardGravity, 0.5f);
                 //playerRigidbody.drag = accelFactor / 50;
-                playerRigidbody.AddForce(camera.transform.forward * accelFactor);
+                playerRigidbody.AddForce(movementObj.transform.forward * accelFactor);
                 velocityMagnitude = playerRigidbody.velocity.magnitude;
             }
             if (Input.GetKey(KeyCode.S))
@@ -85,7 +86,7 @@ public class PlayerMovement : MonoBehaviour {
                 //    //playerRigidbody.drag = accelFactor / 10;
                 //if (GetComponent<Rigidbody>().velocity.magnitude < 3f)
                 //{
-                playerRigidbody.AddForce(-camera.transform.forward * accelFactor);
+                playerRigidbody.AddForce(-movementObj.transform.forward * accelFactor);
                 velocityMagnitude = playerRigidbody.velocity.magnitude;
                 //}
                 //Physics.gravity = Vector3.Slerp(Physics.gravity, maxBackwardGravity, 0.5f);
@@ -97,7 +98,7 @@ public class PlayerMovement : MonoBehaviour {
                 //{
                 //    Vector3 oldRot = playerRigidbody.rotation.eulerAngles;
                 //transform.Rotate(transform.up, -turnSpeed);
-                playerRigidbody.AddForce(-camera.transform.right * accelFactor);
+                playerRigidbody.AddForce(-movementObj.transform.right * accelFactor);
                 //}
                 //Physics.gravity = Vector3.Slerp(Physics.gravity, maxLeftGravity, 0.5f);
 
@@ -108,7 +109,7 @@ public class PlayerMovement : MonoBehaviour {
                 //{
                 //   Vector3 oldRot = playerRigidbody.rotation.eulerAngles;
                 //transform.Rotate(transform.up, turnSpeed);
-                playerRigidbody.AddForce(camera.transform.right * accelFactor);
+                playerRigidbody.AddForce(movementObj.transform.right * accelFactor);
                 //}
                 //Physics.gravity = Vector3.Slerp(Physics.gravity, maxRightGravity, 0.5f);
 
