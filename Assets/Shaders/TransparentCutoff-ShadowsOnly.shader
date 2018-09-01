@@ -42,7 +42,6 @@
 		fixed alpha = tex2D(_MainTex, i.uv).a;
 	// or if you want to use grayscale texture:
 	// fixed alpha = tex2D( _MainTex, i.uv ).r;
-	clip(alpha - _Cutoff);
 
 	SHADOW_CASTER_FRAGMENT(i)
 	}
