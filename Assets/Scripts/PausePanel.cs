@@ -14,7 +14,7 @@ public class PausePanel : MonoBehaviour
 
     void Start()
     {
-        pausePanel = GameObject.Find("Panel");
+        pausePanel = GameObject.Find("Pause");
         pausePanel.SetActive(false);
 
         //JOYCONS START
