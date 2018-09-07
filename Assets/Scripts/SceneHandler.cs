@@ -55,6 +55,10 @@ public class SceneHandler : MonoBehaviour {
             levelName.transform.localScale = maxScale;
             levelName.text = scene.name;
         }
+        else
+        {
+            currLevel = 0;
+        }
         StartCoroutine("Fade");
 
     }

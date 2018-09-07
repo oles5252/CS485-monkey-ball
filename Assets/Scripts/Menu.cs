@@ -23,6 +23,13 @@ public class Menu : MonoBehaviour {
 
     Vector3 pointerPos;
 
+    public int fov;
+
+    public Slider slider;
+
+    public Text fovText;
+    public Text fovbg;
+
     //JOYCON GYRO CONTROLS
     private List<Joycon> joycons;
     public float[] stick;
@@ -35,8 +42,18 @@ public class Menu : MonoBehaviour {
 
         maxUnlocked = PlayerPrefs.GetInt("maxUnlocked", 1);
         continueLevel = maxUnlocked;
-        level.text = continueLevel.ToString();
-        levelbg.text = continueLevel.ToString();
+        if (level != null)
+        {
+            level.text = continueLevel.ToString();
+            levelbg.text = continueLevel.ToString();
+        }
+        fov = PlayerPrefs.GetInt("fov", 60);
+        if (fovText != null && fovbg != null && slider != null)
+        {
+            fovText.text = fov.ToString();
+            fovbg.text = fov.ToString();
+            slider.value = fov;
+        }
 
         //JOYCONS START
         // get the public Joycon array attached to the JoyconManager in scene
@@ -153,6 +170,17 @@ public class Menu : MonoBehaviour {
                     levelbg.text = continueLevel.ToString();
                 }
             }
+            if (Input.GetKey(KeyCode.D))
+            {
+                if (menuItems[pos].name == "FOV" && fov < 120)
+                {
+                    fov++;
+                    fovText.text = fov.ToString();
+                    fovbg.text = fov.ToString();
+                    slider.value = fov;
+                    PlayerPrefs.SetInt("fov", fov);
+                }
+            }
             if (Input.GetKeyDown(KeyCode.D))
             {
                 if (continueLevel < maxUnlocked && menuItems[pos].name == "Continue")
@@ -160,6 +188,18 @@ public class Menu : MonoBehaviour {
                     continueLevel++;
                     level.text = continueLevel.ToString();
                     levelbg.text = continueLevel.ToString();
+                }
+            }
+
+            if (Input.GetKey(KeyCode.A))
+            {
+                if (menuItems[pos].name == "FOV" && fov > 60)
+                {
+                    fov--;
+                    fovText.text = fov.ToString();
+                    fovbg.text = fov.ToString();
+                    slider.value = fov;
+                    PlayerPrefs.SetInt("fov", fov);
                 }
             }
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.KeypadEnter))
