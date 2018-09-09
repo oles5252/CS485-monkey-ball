@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Learning Curve.unity
+- path: Assets/Scenes/Forward March!.unity
   isLoaded: 1
   isActive: 1
