@@ -158,9 +158,10 @@ public class PlayerMovement : MonoBehaviour {
         if (collision.collider.tag != "Player")
         {
             print(collision.collider.name);
-            if (Mathf.Abs(collision.impulse.magnitude) > 17 && collision.impulse.magnitude != 0)
+            if (Mathf.Abs(collision.impulse.magnitude) > 15 && collision.impulse.magnitude != 0)
             {
                 //we'll play a sound here
+                hardCollision.pitch = collision.impulse.magnitude * 0.02f;
                 hardCollision.Play();
                 print(collision.impulse.magnitude);
                 // make sure the Joycon only gets checked if attached
@@ -169,10 +170,6 @@ public class PlayerMovement : MonoBehaviour {
                     Joycon j = joycons[jc_ind];
                     j.SetRumble(160, 320, 0.6f, Mathf.CeilToInt(Mathf.Abs(collision.impulse.magnitude)));
                 }
-            }
-            else if (Mathf.Abs(collision.impulse.magnitude) > 10 && collision.impulse.magnitude != 0)
-            {
-                softCollision.Play();
             }
         }
     }
