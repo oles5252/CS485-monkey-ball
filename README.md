@@ -1,16 +1,16 @@
 # CS485-monkey-ball
-Simple, but fully featured Unity game implementing mechanics from Super Monkey Ball
+Simple, but hopefully well polished Unity game implementing mechanics from Super Monkey Ball
 
 ## Summary
 This project is inspired by the classic Monkey Ball games, specifically Super Monkey Ball for GameCube (https://www.youtube.com/watch?v=MSQCQ8UaI8A), meaning it is a puzzle platformer focusing on momentum and a simple control scheme.
 
-The player controls a ball that rolls around the world. The player traverses a bunch of simple levels to reach a goal, with each level presenting new obstacles or reincorporating old obstacles in new ways. Some obstacles include: bridges, pitfalls, ramps, slides, bumps, moving platforms, buttons (to trigger platforms), and AI enemies that chase you. The game has a running timer throughout the levels, which allows the player to set accumulative high scores. The scoring system enables a player to compete to get faster and faster on every play through. On the menu, there is a New Game option, a level select option, and options (where the player can toggle things like FOV/tilt).
+The player controls a ball that rolls around the world. They traverse a bunch of simple levels to reach a goal, with each level presenting new obstacles or reincorporating old obstacles in new ways. Some obstacles include: bridges, pitfalls, ramps, slides, bumps, moving platforms, buttons (to trigger platforms), and AI enemies that chase you. The game has a running timer throughout the levels, which allows the player to set accumulative high scores. The scoring system enables a player to compete to get faster and faster on every play through. On the menu, there is a New Game option, a level select option, and options (where the player can toggle things like FOV).
 
 ## Graphics
 The game is colorful and cartoon styled. The models will be primarily crafted of simple shapes. I had to make some tweaks, but there is a Unity asset package which provides a “Toon” shader that fits my style. I’ve added post processing elements such as bloom/AA/motion blur.
 
 ## Controls
-The game is playable with a keyboard, a controller, or a Nintendo Joycon. When the player pushes forward on the control stick (or presses W) the ball will slowly accelerate forwards, similarly when the player pushes backwards (or S) the ball will start to accelerate backwards. The left and right directions (A or D) applies a force that moves the player in those directions in order to turn them.
+The game is playable with a keyboard or a Nintendo Joycon. When the player pushes forward on the control stick (or presses W) the ball will slowly accelerate forwards, similarly when the player pushes backwards (or S) the ball will start to accelerate backwards. The left and right directions (A or D) applies a force that moves the player in those directions.
   
 ## Main Features
 •	Main Menu w/ “New Game”, “Level Select”, “High Scores”, “Options” - 5 pt
@@ -23,7 +23,7 @@ The game is playable with a keyboard, a controller, or a Nintendo Joycon. When t
 
 •	Keyboard input - 4 pt
 
-•	Third Person camera that follows the player, must rotate around player smoothly - 10 pt
+•	Third Person camera that follows the player, must rotate smoothly - 10 pt
 
 •	Models/Textures for player, obstacles, world - 5 pt
 
@@ -128,13 +128,13 @@ Asset Package: https://github.com/Looking-Glass/JoyconLib
 Super easy to follow demo code is included with asset package, basically my movement script gets the accelerometer readings every update, and adds force the same way as before, but scaled to the amount of the x accel value for forward/back and to the y accel value for left/right. The buttons or stick is used for menus (positive y is up, negative y is down) and the trigger or stick pressed in is used for selecting a menu option.
 
 ### Player Data
-We need to save int FOV (from options), the float current elapsed time during a playthrough, and the int number of remaining lives. To do this I use PlayerPrefs, which allows us to get/set floats and ints. When “new game” is selected from the menu, the timer is set to 0 and lives is set to 3. When a scene loads, the timer loads the last value and continues counting in a coroutine. There is a rectangle trigger underneath the map, and when the player enters it, the scene reloads and the lives decrements by 1. At the moment, a game over just returns you to the menu.
+We need to save int FOV (from options), the float current elapsed time during a playthrough, and the int number of remaining lives. To do this I use PlayerPrefs, which allows us to get/set floats and ints. When “new game” is selected from the menu, the timer is set to 0 and lives is set to 3. When a scene loads, the timer loads the last value and continues counting in a coroutine. There is a trigger underneath the map, and when the player enters it, the scene reloads and the lives decrements by 1. At the moment, a game over just returns you to the menu.
 
 ### Pause
 Since all gameplay scripts are tied to Time.deltatime, we can set Time.timeScale to 0 to pause and set it to 1 to unpause. I make a panel and “pause” text appear when you’ve paused and disappear when unpaused.
 
 ### Goal
-The goal is a custom mesh created in blender that is a donut with the bottom half flattened. I created a super simple checkered texture for its material (if I had more time, or was a good artist, I would do this with UV maps so that the texture doesn’t stretch weirdly. In the center is a trigger that loads the next level when the player enters it.
+The goal is a custom mesh created in blender shaped like a donut. I created a super simple checkered texture for its material. In the center is a trigger that loads the next level when the player enters it.
 
 ### Platforms
 The platforms are custom meshes created in Blender and have a texture added to them (using UV maps so the texture only appears on the top.
