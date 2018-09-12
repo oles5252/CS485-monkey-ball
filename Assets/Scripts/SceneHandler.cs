@@ -14,7 +14,7 @@ public class SceneHandler : MonoBehaviour {
 
     public string[] levels;
 
-    private int currLevel = 0;
+    public int currLevel = 0;
 
     static SceneHandler instance;
 
@@ -91,6 +91,7 @@ public class SceneHandler : MonoBehaviour {
     public void loadNextLevel()
     {
         currLevel++;
+        PlayerPrefs.SetInt("maxUnlocked", currLevel+1);
         SceneManager.LoadScene(levels[currLevel]);
     }
 

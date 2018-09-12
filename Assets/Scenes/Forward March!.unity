@@ -3587,6 +3587,11 @@ Prefab:
       propertyPath: movementObj
       value: 
       objectReference: {fileID: 1630171941}
+    - target: {fileID: 82697085859742090, guid: f0de8c54e7e259841921e7fab8c38a51,
+        type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0de8c54e7e259841921e7fab8c38a51, type: 2}
   m_IsPrefabAsset: 0

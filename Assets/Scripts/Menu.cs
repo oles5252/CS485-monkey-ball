@@ -8,7 +8,8 @@ public class Menu : MonoBehaviour {
 
     public List<Text> menuItems;
 
-    public List<string> scenes;
+    public SceneHandler sceneHandler;
+    private string[] scenes;
 
     public Text level;
     public Text levelbg;
@@ -38,6 +39,11 @@ public class Menu : MonoBehaviour {
 
     private void Start()
     {
+        if (sceneHandler != null)
+        {
+            scenes = sceneHandler.levels;
+        }
+
         menuItems[pos].color = Color.red;
 
         maxUnlocked = PlayerPrefs.GetInt("maxUnlocked", 1);
@@ -212,7 +218,10 @@ public class Menu : MonoBehaviour {
                 }
                 if (menuItems[pos].name == "Continue")
                 {
-                    SceneManager.LoadScene(scenes[int.Parse(level.text)]);
+                    PlayerPrefs.SetInt("currentLives", 3);
+                    PlayerPrefs.SetFloat("currentTime", 60f*int.Parse(level.text));
+                    sceneHandler.currLevel = int.Parse(level.text)-1;
+                    SceneManager.LoadScene(scenes[int.Parse(level.text)-1]);
                 }
                 if (menuItems[pos].name == "Options")
                 {

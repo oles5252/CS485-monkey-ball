@@ -158,10 +158,10 @@ public class PlayerMovement : MonoBehaviour {
         if (collision.collider.tag != "Player")
         {
             print(collision.collider.name);
-            if (Mathf.Abs(collision.impulse.magnitude) > 15 && collision.impulse.magnitude != 0)
+            if (Mathf.Abs(collision.impulse.magnitude) > 16 && collision.impulse.magnitude != 0)
             {
                 //we'll play a sound here
-                hardCollision.pitch = collision.impulse.magnitude * 0.02f;
+                hardCollision.pitch = collision.impulse.magnitude * 0.03f;
                 hardCollision.Play();
                 print(collision.impulse.magnitude);
                 // make sure the Joycon only gets checked if attached
