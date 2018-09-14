@@ -7,6 +7,8 @@ public class PausePanel : MonoBehaviour
 {
 
     public GameObject pausePanel;
+    public AudioSource pauseSound;
+    public AudioSource movementSound;
 
     //JOYCON GYRO CONTROLS
     private List<Joycon> joycons;
@@ -15,7 +17,10 @@ public class PausePanel : MonoBehaviour
     void Start()
     {
         pausePanel = GameObject.Find("Pause");
-        pausePanel.SetActive(false);
+        if (pausePanel != null)
+        {
+            pausePanel.SetActive(false);
+        }
 
         //JOYCONS START
         // get the public Joycon array attached to the JoyconManager in scene
@@ -33,11 +38,14 @@ public class PausePanel : MonoBehaviour
             {
                 if (!pausePanel.activeInHierarchy)
                 {
+                    movementSound.Stop();
+                    pauseSound.Play();
                     Time.timeScale = 0;
                     pausePanel.SetActive(true);
                 }
                 else
                 {
+                    pauseSound.Play();
                     Time.timeScale = 1;
                     pausePanel.SetActive(false);
                 }
@@ -49,11 +57,14 @@ public class PausePanel : MonoBehaviour
             {
                 if (!pausePanel.activeInHierarchy)
                 {
+                    movementSound.Stop();
+                    pauseSound.Play();
                     Time.timeScale = 0;
                     pausePanel.SetActive(true);
                 }
                 else
                 {
+                    pauseSound.Play();
                     Time.timeScale = 1;
                     pausePanel.SetActive(false);
                 }

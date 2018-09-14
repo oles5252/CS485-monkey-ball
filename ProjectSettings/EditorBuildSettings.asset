@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Options.unity
     guid: 6a05279f620858c439cd3fa1be4b7316
   - enabled: 1
+    path: Assets/Scenes/Leaderboard.unity
+    guid: 59ed3958d13e2a848800fed8970a5b80
+  - enabled: 1
     path: Assets/Scenes/Forward March!.unity
     guid: badce5bd64972264980ed824190f9094
   - enabled: 1
@@ -20,3 +23,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Easy Obstacles.unity
     guid: 21d3d3c88a82e0a47a16f8dc04f7f8dd
+  - enabled: 1
+    path: Assets/Scenes/Floating Away.unity
+    guid: 04cd02afbd4f25e479d861c8599c02f3
+  - enabled: 1
+    path: Assets/Scenes/Jump, man.unity
+    guid: e5642848f9c67bd45983d2deae3ed542
+  m_configObjects: {}

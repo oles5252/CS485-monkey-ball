@@ -31,11 +31,14 @@ public class Menu : MonoBehaviour {
     public Text fovText;
     public Text fovbg;
 
+    public AudioSource selectSound;
+
     //JOYCON GYRO CONTROLS
     private List<Joycon> joycons;
     public float[] stick;
     public int jc_ind = 0;
-    bool stickReset;
+    bool vertStickReset;
+    bool horzStickReset;
 
     private void Start()
     {
@@ -78,7 +81,7 @@ public class Menu : MonoBehaviour {
 
             // stick position values
             stick = j.GetStick(); //element 0 is x, element 1 is y
-            if (j.GetButtonDown(Joycon.Button.DPAD_UP) || (stick[1] > 0.7 && stickReset))
+            if (j.GetButtonDown(Joycon.Button.DPAD_UP) || (stick[1] > 0.7 && vertStickReset))
             {
                 if (pos > 0)
                 {
@@ -88,10 +91,10 @@ public class Menu : MonoBehaviour {
                     pointerPos.y = menuItems[pos].transform.position.y - 15;
                     pointer.transform.position = pointerPos;
                     menuItems[pos].color = Color.red;
-                    stickReset = false;
+                    vertStickReset = false;
                 }
             }
-            if (j.GetButtonDown(Joycon.Button.DPAD_DOWN) || (stick[1] < -0.7 && stickReset))
+            if (j.GetButtonDown(Joycon.Button.DPAD_DOWN) || (stick[1] < -0.7 && vertStickReset))
             {
                 if (pos < menuItems.Count - 1)
                 {
@@ -101,16 +104,69 @@ public class Menu : MonoBehaviour {
                     pointerPos.y = menuItems[pos].transform.position.y - 15;
                     pointer.transform.position = pointerPos;
                     menuItems[pos].color = Color.red;
-                    stickReset = false;
+                    vertStickReset = false;
                 }
             }
             if (stick[1] < 0.2 && stick[1] > -0.2)
             {
-                stickReset = true;
+                vertStickReset = true;
             }
-            if (j.GetButtonDown(Joycon.Button.SHOULDER_1) || j.GetButtonDown(Joycon.Button.SHOULDER_2) || j.GetButtonDown(Joycon.Button.STICK))
+            if (stick[0] < 0.2 && stick[0] > -0.2)
+            {
+                horzStickReset = true;
+            }
+
+            if (j.GetButton(Joycon.Button.DPAD_LEFT) || stick[0] < -0.7)
+            {
+                if (menuItems[pos].name == "FOV" && fov > 60)
+                {
+                    fov--;
+                    fovText.text = fov.ToString();
+                    fovbg.text = fov.ToString();
+                    slider.value = fov;
+                    PlayerPrefs.SetInt("fov", fov);
+                }
+            }
+
+            if ((stick[0] < -0.7 && horzStickReset) || j.GetButtonDown(Joycon.Button.DPAD_LEFT))
+            {
+                if (continueLevel > 1 && menuItems[pos].name == "Continue")
+                {
+                    continueLevel--;
+                    level.text = continueLevel.ToString();
+                    levelbg.text = continueLevel.ToString();
+                    horzStickReset = false;
+                }
+            }
+            if ((stick[0] > 0.7 && horzStickReset) || j.GetButtonDown(Joycon.Button.DPAD_RIGHT))
+            {
+                if (continueLevel < maxUnlocked && menuItems[pos].name == "Continue")
+                {
+                    continueLevel++;
+                    level.text = continueLevel.ToString();
+                    levelbg.text = continueLevel.ToString();
+                    horzStickReset = false;
+                }
+            }
+
+            if (j.GetButton(Joycon.Button.DPAD_RIGHT) || stick[0] > 0.7)
+            {
+                if (menuItems[pos].name == "FOV" && fov < 120)
+                {
+                    fov++;
+                    fovText.text = fov.ToString();
+                    fovbg.text = fov.ToString();
+                    slider.value = fov;
+                    PlayerPrefs.SetInt("fov", fov);
+                }
+            }
+            if (j.GetButtonDown(Joycon.Button.SHOULDER_1) || j.GetButtonDown(Joycon.Button.SHOULDER_2) || j.GetButtonDown(Joycon.Button.STICK) || j.GetButtonDown(Joycon.Button.PLUS) || j.GetButtonDown(Joycon.Button.MINUS))
             {
                 j.SetRumble(160, 320, 0.6f, 200);
+                if (selectSound != null)
+                {
+                    selectSound.Play();
+                }
                 if (menuItems[pos].name == "New Game")
                 {
                     PlayerPrefs.SetInt("currentLives", 3);
@@ -119,7 +175,10 @@ public class Menu : MonoBehaviour {
                 }
                 if (menuItems[pos].name == "Continue")
                 {
-                    SceneManager.LoadScene(scenes[int.Parse(level.text)]);
+                    PlayerPrefs.SetInt("currentLives", 3);
+                    PlayerPrefs.SetFloat("currentTime", 60f * int.Parse(level.text));
+                    sceneHandler.currLevel = int.Parse(level.text) - 1;
+                    SceneManager.LoadScene(scenes[int.Parse(level.text) - 1]);
                 }
                 if (menuItems[pos].name == "Options")
                 {
@@ -210,6 +269,10 @@ public class Menu : MonoBehaviour {
             }
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.KeypadEnter))
             {
+                if (selectSound != null)
+                {
+                    selectSound.Play();
+                }
                 if (menuItems[pos].name == "New Game")
                 {
                     PlayerPrefs.SetInt("currentLives", 3);

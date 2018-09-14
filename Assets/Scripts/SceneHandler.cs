@@ -50,16 +50,16 @@ public class SceneHandler : MonoBehaviour {
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
         StopCoroutine("Fade");
-        if(scene.name != "Menu" && scene.name != "Options")
+        if(scene.name != "Menu" && scene.name != "Options" && scene.name != "Leaderboard")
         {
             levelName.transform.localScale = maxScale;
             levelName.text = scene.name;
+            StartCoroutine("Fade");
         }
         else
         {
             currLevel = 0;
         }
-        StartCoroutine("Fade");
 
     }
 
@@ -84,8 +84,8 @@ public class SceneHandler : MonoBehaviour {
 
     public void loadLevel(int levelNum)
     {
-        SceneManager.LoadScene(levels[levelNum]);
         currLevel = levelNum;
+        SceneManager.LoadScene(levels[levelNum]);
     }
 
     public void loadNextLevel()

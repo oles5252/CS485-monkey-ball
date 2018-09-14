@@ -18,13 +18,12 @@ public class Bumper : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        // Calculate Angle Between the collision point and the player
+        // get angle
         Vector3 dir = collision.contacts[0].point - collision.gameObject.transform.position;
-        // We then get the opposite (-Vector3) and normalize it
+        // Get opposite vector and normalize
         dir = -dir.normalized;
         // And finally we add force in the direction of dir and multiply it by force. 
         // This will push back the player
         collision.gameObject.GetComponent<Rigidbody>().AddForce(dir * force, ForceMode.Impulse);
-        //collision.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * forceScale, ForceMode.Impulse);
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class ClearSight : MonoBehaviour
 {
     public float DistanceToPlayer = 5.0f;
+    public float PlayerRadius = 1f;
     public Material TransparentMaterial = null;
     public float FadeInTimeout = 0.6f;
     public float FadeOutTimeout = 0.2f;
@@ -13,7 +14,7 @@ public class ClearSight : MonoBehaviour
     {
         RaycastHit[] hits; // you can also use CapsuleCastAll() 
                            // TODO: setup your layermask it improve performance and filter your hits. 
-        hits = Physics.RaycastAll(transform.position, transform.forward, DistanceToPlayer);
+        hits = Physics.SphereCastAll(transform.position, PlayerRadius, transform.forward, DistanceToPlayer);
         foreach (RaycastHit hit in hits)
         {
             Renderer R = hit.collider.GetComponent<Renderer>();

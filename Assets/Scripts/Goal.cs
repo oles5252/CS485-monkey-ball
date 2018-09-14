@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Goal : MonoBehaviour {
 
     public SceneHandler handler;
+    public bool isFinalLevel = false;
 
 	// Use this for initialization
 	void Start () {
@@ -20,7 +22,14 @@ public class Goal : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Player")
         {
-            handler.loadNextLevel();
+            if (!isFinalLevel)
+            {
+                handler.loadNextLevel();
+            }
+            else
+            {
+                SceneManager.LoadScene("Leaderboard");
+            }
         }
     }
 }

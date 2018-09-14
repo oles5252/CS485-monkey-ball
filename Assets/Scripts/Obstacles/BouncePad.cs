@@ -18,6 +18,7 @@ public class BouncePad : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
+        //add force to the player in the up vector
         collision.gameObject.GetComponent<Rigidbody>().AddForce(gameObject.transform.up * forceScale, ForceMode.Impulse);
     }
 }
