@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 170de9be99522f3489bc1428103fd811, type: 2}
+  m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -44,7 +44,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 1
+  m_GIWorkflowMode: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -211,7 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e6d6ebeaeff60349a2c74f2ef8aee35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 30
+  force: 50
 --- !u!23 &219371949
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -649,7 +649,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e6d6ebeaeff60349a2c74f2ef8aee35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 30
+  force: 50
 --- !u!23 &482565613
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -866,7 +866,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e6d6ebeaeff60349a2c74f2ef8aee35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 30
+  force: 50
 --- !u!23 &655513042
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1881,22 +1881,17 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 224409635554746192, guid: 7398ba61da9158e4cb4c6528b8acf1ec,
-        type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4131508399998824, guid: 7398ba61da9158e4cb4c6528b8acf1ec, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4131508399998824, guid: 7398ba61da9158e4cb4c6528b8acf1ec, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4131508399998824, guid: 7398ba61da9158e4cb4c6528b8acf1ec, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 4131508399998824, guid: 7398ba61da9158e4cb4c6528b8acf1ec, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1918,17 +1913,47 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 4210513188937910, guid: 7398ba61da9158e4cb4c6528b8acf1ec, type: 2}
+    - target: {fileID: 224409635554746192, guid: 7398ba61da9158e4cb4c6528b8acf1ec,
+        type: 2}
       propertyPath: m_LocalPosition.z
-      value: 28
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4210513188937910, guid: 7398ba61da9158e4cb4c6528b8acf1ec, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: -1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4210513188937910, guid: 7398ba61da9158e4cb4c6528b8acf1ec, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 4652380219730502, guid: 7398ba61da9158e4cb4c6528b8acf1ec, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4652380219730502, guid: 7398ba61da9158e4cb4c6528b8acf1ec, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7398ba61da9158e4cb4c6528b8acf1ec, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &1159234694 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1567791835284408, guid: 7398ba61da9158e4cb4c6528b8acf1ec,
+    type: 2}
+  m_PrefabInternal: {fileID: 1159234693}
+--- !u!114 &1159234695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1159234694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: 21a31b6b07a0d8d4d9774892b039ec98, type: 2}
 --- !u!1001 &1185880409
 Prefab:
   m_ObjectHideFlags: 0
@@ -2481,7 +2506,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e6d6ebeaeff60349a2c74f2ef8aee35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 30
+  force: 50
 --- !u!23 &1618846947
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3119,7 +3144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e6d6ebeaeff60349a2c74f2ef8aee35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 30
+  force: 50
 --- !u!23 &2078751500
 MeshRenderer:
   m_ObjectHideFlags: 0

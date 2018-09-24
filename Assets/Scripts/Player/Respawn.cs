@@ -22,16 +22,19 @@ public class Respawn : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        remaining = PlayerPrefs.GetInt("currentLives") - 1;
-        if (remaining > 0)
+        if (other.tag == "Respawn")
         {
-            PlayerPrefs.SetInt("currentLives", remaining);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
-        else
-        {
-            SceneManager.LoadScene("Menu");
-            //later this will go to game over
+            remaining = PlayerPrefs.GetInt("currentLives") - 1;
+            if (remaining > 0)
+            {
+                PlayerPrefs.SetInt("currentLives", remaining);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+            else
+            {
+                SceneManager.LoadScene("Menu");
+                //later this will go to game over
+            }
         }
     }
 }

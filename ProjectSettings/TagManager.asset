@@ -7,6 +7,7 @@ TagManager:
   - keepInside
   - Fire
   - SceneHandler
+  - ballBounds
   layers:
   - Default
   - TransparentFX
